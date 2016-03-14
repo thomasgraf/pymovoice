@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sample Invoice</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+      <style>
+          @media print {
+
+    @page:first {
+
+        @top-right {
+            content: none;
+        }
+        @top-left {
+            content: none;
+        }
+    }
+
+    @page {
+        margin: 2cm 2.5cm 3cm 2.5cm;
+
+        @top-left {
+            content: xhtml('<div class="header"><table class="header header-footer"><tr><td class="invoicetext"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table></div>');
+            vertical-align: bottom;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+        @bottom-left {
+            content: xhtml('<div class="footer"><table class="footer header-footer"><tr><td class="pagecounter"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table><p class="companyinfo"></p></div>');
+            vertical-align: top;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+    }
+}
+
+      </style>
+
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="row" style="min-height: 3.3cm">
+          <a href="/invoices/add">Add Invoice</a>
+        <table class="table">
+            <thead>
+              <tr>
+                  <td>#</td>
+                  <td>Date</td>
+                  <td>Cutomer ID</td>
+                  <td>Customer Addr</td>
+                  <td>Amount</td>
+
+              </tr>
+            </thead>
+            <tbody>
+            <tr tal:repeat="invoice invoices">
+                <td><a tal:attributes="href python:'/invoices/'+str(invoice._id)+'/print'; target '_blank'" tal:content="invoice.invoice_number">Invoice Number</a>
+                    <a tal:attributes="href python:'/invoices/'+str(invoice._id)+'/edit'; target '_blank'" >edit</a></td>
+                <td tal:content="python:invoice.invoice_date.strftime('%d.%m.%Y')">Date</td>
+                <td tal:content="invoice.customer_id">Cutomer ID</td>
+                <td tal:content="invoice.address">Customer Addr</td>
+                <td tal:content="python:u'%0.2f €' % invoice.amount ">Amount</td>
+            </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

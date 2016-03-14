@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sample Invoice</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <style>
+          @media print {
+
+    @page:first {
+
+        @top-right {
+            content: none;
+        }
+        @top-left {
+            content: none;
+        }
+    }
+
+    @page {
+        margin: 2cm 2.5cm 3cm 2.5cm;
+
+        @top-left {
+            content: xhtml('<div class="header"><table class="header header-footer"><tr><td class="invoicetext"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table></div>');
+            vertical-align: bottom;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+        @bottom-left {
+            content: xhtml('<div class="footer"><table class="footer header-footer"><tr><td class="pagecounter"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table><p class="companyinfo"></p></div>');
+            vertical-align: top;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+    }
+}
+
+      </style>
+
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="row" style="min-height: 3.3cm">
+        <div class="col-xs-6">
+            <h4>{{ core_data.company_name}}</h4>
+
+        </div>
+        <div class="col-xs-6 text-right" style="font-size: 80%;">
+
+          {{ core_data.contact_person.name }}<br/>{{ core_data.company_address.street }}<br/>{{ core_data.company_address.postcode}} {{ core_data.company_address.city}}<br/>
+          Tel: {{ core_data.contact_person.phone}}<br/>
+          Mobil: {{ core_data.contact_person.mobile}}<br/>
+          Mail: {{ core_data.contact_person.mail}}
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><small>
+              {{ core_data.company_name}} - {{ core_data.company_address.street }} - {{ core_data.company_address.postcode}} {{ core_data.company_address.city}}</small>
+            </div>
+            <div class="panel-body">
+              <p tal:omit-tag=""
+                tal:repeat="line address.splitlines()">
+                ${line}<br />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 text-right">
+          <div class="panel panel-default" style="border-width: 0px;">
+            <div class="panel-body">
+              <p>
+                <dl>
+                  <dt>Rechnungsnummer</dt>
+                  <dd tal:content="invoice_number"></dd>
+                  <dt>Rechnungsdatum</dt>
+                  <dd tal:content="python:invoice_date.strftime('%d.%m.%Y')">{{invoice_date}}</dd>
+                  <dt>Kundennummer</dt>
+                  <dd tal:content="customer_id">{{ customer_id }}</dd>
+                </dl>
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+        <p>
+        ${ salutation },<br/>
+        ${ invoice_pre_text }
+        </p>
+      <!-- / end client details section -->
+      <table class="table table-bordered split_this_table">
+        <thead>
+          <tr>
+            <th>
+                Beschreibung
+            </th>
+            <th>
+                Menge
+            </th>
+            <th>
+                Einzelpreis
+            </th>
+            <th>
+                Gesamtpreis
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr tal:repeat="item invoice_items">
+
+            <td>
+                <p tal:omit-tag=""
+                tal:repeat="line item.description.splitlines()">
+                ${line}<br />
+                </p>
+            </td>
+            <td class="text-right" tal:content="item.quantity">6</td>
+            <td class="text-right" tal:content="python:u'%0.2f €' % item.unitprice ">Einzelpreis</td>
+            <td class="text-right" tal:content="python:u'%0.2f €' % item.price_of_position ">Gesamtpreis der Position</td>
+          </tr>
+          <tr style="border: 0px solid white">
+              <td style="border: 0px solid white"></td>
+              <td  style="border: 0px solid white"></td>
+              <td style="border: 0px solid white; font-weight: bold;" class="text-right">Gesamtbetrag</td>
+              <td  class="text-right" style="border: 0px solid white; font-weight: bold;" tal:content="python:u'%0.2f €' % amount ">999€</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Bankverbindung
+            </div>
+            <div class="panel-body">
+              <small>
+                {{ core_data.bank_account }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Zahlungsbedingungen
+            </div>
+            <div class="panel-body">
+                <small>{{ core_data.terms_of_payment }}</small>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
