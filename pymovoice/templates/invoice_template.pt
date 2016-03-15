@@ -145,8 +145,8 @@
               Bankverbindung
             </div>
             <div class="panel-body">
-              <small>
-                {{ core_data.bank_account }}
+              <small><div tal:repeat="bank_account core_data.bank_accounts">
+                <span tal:content="bank_account">Bank account</span></div>
               </small>
             </div>
           </div>
@@ -157,7 +157,7 @@
               Zahlungsbedingungen
             </div>
             <div class="panel-body">
-                <small>{{ core_data.terms_of_payment }}</small>
+                <small><span tal:content="core_data.terms_of_payment">terms of payment</span></small>
 
             </div>
           </div>
