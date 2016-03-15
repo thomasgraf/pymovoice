@@ -51,9 +51,9 @@
         <div class="col-xs-6 text-right" style="font-size: 80%;">
 
           <span tal:content="core_data.contact_person.name">{{ core_data.contact_person.name }}</span><br/><span tal:content="core_data.company_address.street">Street</span><br/><span tal:content="core_data.company_address.postcode">postcode</span>&nbsp;<span tal:content="core_data.company_address.city">city</span><br/>
-          Tel: {{ core_data.contact_person.phone}}<br/>
-          Mobil: {{ core_data.contact_person.mobile}}<br/>
-          Mail: {{ core_data.contact_person.mail}}
+          Tel: <span tal:content="core_data.contact_person.phone">Phone</span><br/>
+          Mobil: <span tal:content="core_data.contact_person.mobile">Mobil</span><br/>
+          Mail: <span tal:content="core_data.contact_person.mail">Mail</span>
         </div>
 
       </div>
@@ -61,7 +61,7 @@
         <div class="col-xs-6">
           <div class="panel panel-default">
             <div class="panel-heading"><small>
-              {{ core_data.company_name}} - {{ core_data.company_address.street }} - {{ core_data.company_address.postcode}} {{ core_data.company_address.city}}</small>
+              <span tal:content="core_data.company_name">{{ core_data.company_name}}</span> - <span tal:content="core_data.company_address.street">{{ core_data.company_address.street }}</span> - <span tal:content="core_data.company_address.postcode">{{ core_data.company_address.postcode}}</span>&nbsp;<span tal:content="core_data.company_address.city">{{ core_data.company_address.city }}</span></small>
             </div>
             <div class="panel-body">
               <p tal:omit-tag=""
