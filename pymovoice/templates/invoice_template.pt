@@ -146,7 +146,7 @@
             </div>
             <div class="panel-body">
               <small><div tal:repeat="bank_account core_data.bank_accounts">
-                <span tal:content="bank_account">Bank account</span></div>
+                <span tal:content="structure bank_account">Bank account</span></div>
               </small>
             </div>
           </div>
@@ -157,7 +157,7 @@
               Zahlungsbedingungen
             </div>
             <div class="panel-body">
-                <small><span tal:content="core_data.terms_of_payment">terms of payment</span></small>
+                <small><span tal:content="structure core_data.terms_of_payment">terms of payment</span></small>
 
             </div>
           </div>
