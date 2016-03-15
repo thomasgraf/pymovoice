@@ -130,8 +130,12 @@ def add_invoice(request):
 
 @view_config(route_name='invoice', renderer='templates/invoice_template.pt')
 def show_invoice(request):
+    invoice_data = {}
     client = MongoClient('mongodb://localhost:27017/')
     db = client['invoices']
     collection = db['invoices']
     print collection.find_one({"_id": ObjectId(request.matchdict['invoice_id'])})
-    return collection.find_one({"_id": ObjectId(request.matchdict['invoice_id'])})
+    invoice_data =  collection.find_one({"_id": ObjectId(request.matchdict['invoice_id'])})
+    collection = db['core_data']
+    invoice_data['core_data'] = collection.find_one({})
+    return invoice_data
