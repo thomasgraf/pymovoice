@@ -50,7 +50,7 @@
         </div>
         <div class="col-xs-6 text-right" style="font-size: 80%;">
 
-          {{ core_data.contact_person.name }}<br/>{{ core_data.company_address.street }}<br/>{{ core_data.company_address.postcode}} {{ core_data.company_address.city}}<br/>
+          <span tal:content="core_data.contact_person.name">{{ core_data.contact_person.name }}</span><br/><span tal:content="core_data.company_address.street">Street</span><br/><span tal:content="core_data.company_address.postcode">postcode</span>&nbsp;<span tal:content="core_data.company_address.city">city</span><br/>
           Tel: {{ core_data.contact_person.phone}}<br/>
           Mobil: {{ core_data.contact_person.mobile}}<br/>
           Mail: {{ core_data.contact_person.mail}}
