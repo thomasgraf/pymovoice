@@ -45,7 +45,7 @@
     <div class="container">
       <div class="row" style="min-height: 3.3cm">
         <div class="col-xs-6">
-            <h4>{{ core_data.company_name}}</h4>
+            <h4 tal:content="core_data.company_name">{{ core_data.company_name}}</h4>
 
         </div>
         <div class="col-xs-6 text-right" style="font-size: 80%;">

@@ -137,6 +137,8 @@ def show_invoice(request):
     print collection.find_one({"_id": ObjectId(request.matchdict['invoice_id'])})
     invoice_data =  collection.find_one({"_id": ObjectId(request.matchdict['invoice_id'])})
     collection = db['core_data']
+    import pprint
     invoice_data['core_data'] = collection.find_one({})
-    print collection.find_one({})
+    pprint.pprint(collection.find_one({}))
+    pprint.pprint(invoice_data['core_data']['company_name'])
     return invoice_data
