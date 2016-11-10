@@ -1,0 +1,12 @@
+.deformWidgetWithStyle {
+
+  font-family: Arial, sans-serif;
+  color: #000000;
+  font-size: 20pt;
+  border: 1px solid #008030;
+  background-color: #F4FFF4;
+  height: 30pt;
+  width: 250px;
+  padding: 3px;
+
+}

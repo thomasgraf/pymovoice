@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sample Invoice</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <style>
+          @media print {
+
+    @page:first {
+
+        @top-right {
+            content: none;
+        }
+        @top-left {
+            content: none;
+        }
+    }
+
+    @page {
+        margin: 2cm 2.5cm 3cm 2.5cm;
+
+        @top-left {
+            content: xhtml('<div class="header"><table class="header header-footer"><tr><td class="invoicetext"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table></div>');
+            vertical-align: bottom;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+        @bottom-left {
+            content: xhtml('<div class="footer"><table class="footer header-footer"><tr><td class="pagecounter"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table><p class="companyinfo"></p></div>');
+            vertical-align: top;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+    }
+}
+
+      </style>
+
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="row" style="min-height: 3.3cm">
+        <div class="col-xs-6">
+            <h4>Firmenname</h4>
+
+        </div>
+
+
+      </div>
+        <a href="/articles/">Artikelliste</a> <br/>
+      <div class="row" style="min-height: 3.3cm">
+      <div tal:content="name" />
+      <div tal:content="item_number" />
+      <div tal:content="amount" />
+      <div tal:content="cost" />
+      </div>
+
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<template>
+     <require from="bootstrap/css/bootstrap.css"></require>
+  <h1>${message}</h1>
+
+  <form submit.trigger="searchArticle()">
+    <input type="text" value.bind="current_article.eancode">
+    <button type="submit">search article</button>
+  </form>
+
+
+  <form submit.trigger="addArticle()">
+    <input type="text" value.bind="current_article.eancode">
+    <input type="text" value.bind="current_article.detailname">
+    <input type="text" value.bind="current_article.stockquantity">
+    <button type="submit">add article</button>
+  </form>
+
+</template>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Artikeluebersicht</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+      <style>
+          @media print {
+
+    @page:first {
+
+        @top-right {
+            content: none;
+        }
+        @top-left {
+            content: none;
+        }
+    }
+
+    @page {
+        margin: 2cm 2.5cm 3cm 2.5cm;
+
+        @top-left {
+            content: xhtml('<div class="header"><table class="header header-footer"><tr><td class="articletext"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table></div>');
+            vertical-align: bottom;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+        @bottom-left {
+            content: xhtml('<div class="footer"><table class="footer header-footer"><tr><td class="pagecounter"></td><td class="right subtotaltext"></td><td class="right currency"></td><td class="subtotal"></td></tr></table><p class="companyinfo"></p></div>');
+            vertical-align: top;
+            padding-left: 0.2cm;
+            padding-right: 0.2cm;
+        }
+    }
+}
+
+      </style>
+
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="row" style="min-height: 3.3cm">
+          <a href="/articles/add">Neuer Artikel</a> | <a href="/articles/xls">Excel - Export</a>
+        <table class="table">
+            <thead>
+              <tr>
+                  <td>#</td>
+                  <td>Herstellerartikelnummer</td>
+                  <td>Bezeichnung</td>
+                  <td>Menge</td>
+                  <td>Einkaufspreis</td>
+                  <td>EAN-Code</td>
+
+
+              </tr>
+            </thead>
+            <tbody>
+            <tr tal:repeat="article articles">
+                <td><a tal:attributes="href python:'/articles/'+str(article._id)+'/print'; target '_blank'" tal:content="article.item_number">Artikelnummer</a>
+                    <a tal:attributes="href python:'/articles/'+str(article._id)+'/edit'; target '_blank'" >edit</a> | <a tal:attributes="href python:'/articles/'+str(article._id)+'/stocktake'; target '_blank'" >inventur</a></td>
+
+
+                <td tal:content="article.vendor_item_number">Artikelbezeichnung</td>
+                <td tal:content="article.name">Artikelbezeichnung</td>
+                <td tal:content="article.amount">Amount</td>
+                <td tal:content="python:u'%0.2f €' % article.cost ">Einkaufspreis</td>
+                <td tal:content="article.eancode">EAN-Code</td>
+            </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

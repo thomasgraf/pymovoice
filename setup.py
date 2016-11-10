@@ -14,6 +14,8 @@ requires = [
     'pyramid_debugtoolbar',
     'pyramid_fanstatic',
     'waitress',
+    'xlrd',
+    'xlwt',
     ]
 
 setup(name='pymovoice',
